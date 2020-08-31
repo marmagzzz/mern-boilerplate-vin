@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
@@ -64,20 +63,6 @@ const config = require("./config/key"),
 
 /** END OF SERVER CONFIGS */
 
-/** ROUTE REGISTRATION */
-
-/** INDEX ROUTE */
-
-  const IndexRoute = require('./routes/index');
-  app.use('/', IndexRoute);
-
-/** USER ROUTES */
-  const UsersRoutes = require('./routes/api/users');
-  app.use('/api/users', UsersRoutes);
-
-
-/** END OF ROUTE REGISTRATION */
-
 
 
 //use this to show the image you have in node js server to client (react js)
@@ -91,11 +76,23 @@ if (process.env.NODE_ENV === "production") {
   // All the javascript and css files will be read and served from this folder
   app.use(express.static("client/build"));
 
-  // index.html for all page routes    html or routing and naviagtion
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-  });
 }
+
+
+/** ROUTE REGISTRATION */
+
+    /** USER ROUTES */
+    const UsersRoutes = require('./routes/api/users');
+    app.use('/api/users', UsersRoutes);
+
+    /** NOTE : ALWAYS PUT THIS ROUTE AS THE LAST ROUTE */
+    /** THIS IS A FRONT END ROUTE */
+
+    /** INDEX ROUTE */
+    const IndexRoute = require('./routes/index');
+    app.use('*', IndexRoute);
+
+/** END OF ROUTE REGISTRATION */
 
 /** START LISTEN TO PORT */
 app.listen(SERVER_PORT, () => {
