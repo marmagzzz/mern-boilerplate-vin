@@ -9,6 +9,7 @@ module.exports = CORS({
         if(!origin) return callback(null, true);
         
         console.log('Origin: ', origin);
+        console.log('Index of: ', allowedOrigins.indexOf(origin));
 
         if(allowedOrigins.indexOf(origin) === -1){
             var msg = 'The CORS policy for this site does not ' +
