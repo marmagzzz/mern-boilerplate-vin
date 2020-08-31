@@ -1,4 +1,4 @@
 module.exports = {
-    mongoURI : 'mongodb+srv://admin:admin@prosperna.fgxk2.mongodb.net/prospernadb?retryWrites=true&w=majority',
+    mongoURI : 'mongodb+srv://admin:marmagz>@bentamonatol.z8n1x.mongodb.net/bentamonatol?retryWrites=true&w=majority',
     SERVER_PORT : 5000
 };
