@@ -14,19 +14,26 @@ function RightMenu(props) {
       if (response.status === 200) {
         props.history.push("/login");
       } else {
-        alert('Log Out Failed')
+        alert('Log Out Failed');
       }
     });
   };
 
+  console.log('User data', user.userData)
   if (user.userData && !user.userData.isAuth) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
-          <a href="/login">Signin</a>
+          <a onClick={(e) => {
+              e.preventDefault();
+              props.history.push('/login')
+          }}>Signin</a>
         </Menu.Item>
         <Menu.Item key="app">
-          <a href="/register">Signup</a>
+          <a onClick={(e) => {
+              e.preventDefault();
+              props.history.push('/register')
+          }}>Signup</a>
         </Menu.Item>
       </Menu>
     )

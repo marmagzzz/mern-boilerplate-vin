@@ -61,8 +61,15 @@ router.get("/auth", (req, res, next) => {
                 //         message : err,
                 //     });
                 // });
+
                 req.token = user.token;
-                req.user = user;
+                req.user = {
+                    _id : user._id,
+                    name : user.name,
+                    email : user.email,
+                    lastname : user.lastname,
+                };
+
                 res.status(200).json({
                     _id: req.user._id,
                     isAdmin: req.user.role === 0 ? false : true,
@@ -185,9 +192,8 @@ router.get("/logout", passport.authenticate('jwt', {session : false}), (req, res
 // @access Admin
 router.get("/getallusers", passport.authenticate('jwt', {session : false}), (req, res) => {
 // router.get("/getallusers", auth, (req, res) => {
-    const { userId } = req.body;
-    User.find({ _id : userId, role : 1 })
-    // User.findById(userId)
+    const { _id } = req.user;
+    User.findOne({ _id : _id, role : 1 })
         .then((user) => {
             
             if ( !user ) {
@@ -200,12 +206,12 @@ router.get("/getallusers", passport.authenticate('jwt', {session : false}), (req
             else {
                 User.find({ 
                     _id : {
-                        $ne : userId
+                        $ne : _id
                     } 
                 })
                 .then( users => {
                     res.send({
-                        userId : userId,
+                        userId : _id,
                         users : users
                     });
                 });

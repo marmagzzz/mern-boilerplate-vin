@@ -81,14 +81,21 @@ if (process.env.NODE_ENV === "production") {
 
 /** ROUTE REGISTRATION */
 
-    /** USER ROUTES */
+    /** API ROUTES */
+    
+    // USER ROUTES
     const UsersRoutes = require('./routes/api/users');
     app.use('/api/users', UsersRoutes);
 
+    // ITEM ROUTES
+    const ItemRoutes = require('./routes/api/items');
+    app.use('/api/items', ItemRoutes);
+
+    // FRONT END ROUTES
     /** NOTE : ALWAYS PUT THIS ROUTE AS THE LAST ROUTE */
     /** THIS IS A FRONT END ROUTE */
 
-    /** INDEX ROUTE */
+    // INDEX ROUTE
     const IndexRoute = require('./routes/index');
     app.use('/', IndexRoute);
 
