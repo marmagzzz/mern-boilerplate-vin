@@ -11,7 +11,8 @@
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "backend": "nodemon server/server.js",
     "frontend": "npm run start --prefix client",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
+    "build-client": "npm run build --prefix client"
   },
   "author": "Marvin Magnaye",
   "license": "ISC",
